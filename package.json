@@ -1,0 +1,46 @@
+{
+  "name": "q-auth",
+  "version": "1.0.0",
+  "description": "Easy-to-use authentication integration template for beginners",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aditya-garg-09-01-2002/q-auth.git"
+  },
+  "keywords": [
+    "Beginner",
+    "Authenticator"
+  ],
+  "author": "github.com/aditya-garg-09-01-2002",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aditya-garg-09-01-2002/q-auth/issues"
+  },
+  "homepage": "https://github.com/aditya-garg-09-01-2002/q-auth#readme",
+  "dependencies": {
+    "@prisma/client": "^5.20.0",
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "express": "^4.21.0",
+    "jsonwebtoken": "^9.0.2",
+    "prisma": "^5.20.0",
+    "uuidv4": "^6.2.13"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/cookie-parser": "^1.4.7",
+    "@types/cors": "^2.8.17",
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^5.0.0",
+    "@types/jsonwebtoken": "^9.0.7",
+    "@types/node": "^22.7.4",
+    "@types/uuidv4": "^5.0.0",
+    "dotenv": "^16.4.5",
+    "nodemon": "^3.1.7",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.2"
+  }
+}
