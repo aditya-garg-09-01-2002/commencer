@@ -6,5 +6,4 @@ export interface SessionJwtPayload extends JwtPayload{
 
 export interface UserJwtPayload extends JwtPayload{
     userId:string
-    name:string
 }
