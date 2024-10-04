@@ -1,16 +1,17 @@
 import express, { Router } from "express"
 import { isValidSession } from "../../middlewares/session"
-import { Login, Logout } from "../../controllers/user"
+import { changePassword, forgotPassword, login, logout, registerUser, removeUser, resendOtp, resetPassword, setPassword } from "../../controllers/user"
+import { getUserDetailsFromAPIBody, getUserDetailsFromJwt, verifyOtp, verifyPassword } from "../../middlewares/auth"
 const router:Router=express.Router()
 
-router.post("/register-user")
-router.post("/login",Login)
-router.post("/logout",isValidSession,Logout)
-router.put("/change-password")
-router.put("/forgot-password")
-router.get("/send-otp/mobile")
-router.get("/send-otp/email")
-router.post("/verify-otp")
-router.delete("/remove-user")
+router.post("/register-user",registerUser)
+router.post("/login",getUserDetailsFromAPIBody,verifyPassword,login)
+router.post("/logout",isValidSession,logout)
+router.get("/forgot-password",forgotPassword)
+router.get("/change-password",isValidSession,getUserDetailsFromJwt,verifyPassword,changePassword)
+router.put("/resend-otp",resendOtp)
+router.put("/set-password",verifyOtp,setPassword)
+router.put("/reset-password",verifyOtp,resetPassword)
+router.delete("/remove-user",isValidSession,getUserDetailsFromJwt,verifyPassword,removeUser)
 
 export default router
