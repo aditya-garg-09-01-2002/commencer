@@ -1,0 +1,13 @@
+# Commit Summary (50 characters or less)
+
+# Why is this change necessary?
+#
+# - Explanation of the reason behind this change.
+# - Mention relevant issues (e.g., closes #123).
+
+# How was this change implemented?
+#
+# - Description of the solution and the approach.
+# - List any important notes or side effects.
+
+Issue Reference: #<issue-number>
