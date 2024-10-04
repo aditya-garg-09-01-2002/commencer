@@ -15,15 +15,25 @@ datasource db {
 
 model User {
   userId       String @id @db.VarChar(255)
-  passwordHash String @db.VarChar(255)
+  passwordHash String? @db.VarChar(255)
 
   profile Profile?
+  otp Otp?
 }
 
 model Profile {
   id     Int    @id @default(autoincrement())
   userId String @unique @db.VarChar(255)
+  altId String? @db.VarChar(255)
   name   String @db.VarChar(255)
 
-  user User?  @relation(fields: [userId], references: [userId])
+  user User?  @relation(fields: [userId], references: [userId], onDelete: Cascade)
+}
+
+model Otp{
+  is Int @id @default(autoincrement())
+  otpHash String @db.VarChar(255)
+  userId String @unique @db.VarChar(255)
+
+  user User? @relation(fields:[userId], references: [userId], onDelete: Cascade)
 }
