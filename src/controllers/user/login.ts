@@ -18,7 +18,9 @@ export default async function Login(req:Request,res:Response){
             secure : isProductionEnv(),
             sameSite : isProductionEnv() ? "none" : "lax"
         })
-        res.status(200).json({fetched:true,message:"You have successfully logged in!!!",[UserJwt.name]:userJwtToken,[SessionJwt.name]:sessionJwtToken})
+        res.setHeader(UserJwt.name,userJwtToken)
+        res.setHeader(SessionJwt.name,sessionJwtToken)
+        res.status(200).json({fetched:true,message:"You have successfully logged in!!!"})
     }catch(error){
         console.log(error)
         res.status(500).json({fetched:false,message:"Internal Server Error"})
