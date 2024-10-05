@@ -3,13 +3,15 @@ import jwt from "jsonwebtoken"
 import { SessionJwt } from "../../config/jwt";
 import { SessionJwtPayload } from "../../interfaces/jwt";
 import { SessionCookie } from "../../config/cookie";
+import { isEmptyStr } from "../../utils/dataFormat";
 
 export default function isValidSession(req:Request,res:Response,next:NextFunction){
     try{    
-        const sessionJwtToken:string|undefined = req.params.sessionJwtToken
+        const sessionJwtHeaders:string|string[]|undefined = req.headers[SessionJwt.name.toLowerCase()]
+        const sessionJwtToken:string|undefined = Array.isArray(sessionJwtHeaders) ? sessionJwtHeaders[0] : sessionJwtHeaders
         const sessionIDFromSessionCookie = req.signedCookies[SessionCookie.name]
-        if(sessionJwtToken === undefined){
-            throw new Error("JWT Token not found")
+        if(sessionJwtToken === undefined || isEmptyStr(sessionJwtToken) || isEmptyStr(sessionIDFromSessionCookie)){
+            throw new Error("Session credentials not found")
         }
         else{
             const jwtTokenData = jwt.verify(sessionJwtToken,SessionJwt.key) as SessionJwtPayload
