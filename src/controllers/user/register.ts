@@ -1,8 +1,7 @@
 import { Request, Response } from "express";
 import { database } from "../../config/database";
-import { uuid } from "uuidv4";
-import { hash } from "bcrypt";
 import { sendOtp } from "../../utils/communication";
+import generateOTP from "../../utils/otp";
 
 export default async function registerUser(req:Request,res:Response){
     try{
@@ -10,8 +9,7 @@ export default async function registerUser(req:Request,res:Response){
         const idType = req.params.idType
         const user = await database.user.findUnique({where:{userId:userId}})
         if(!user){
-            const otp = uuid()
-            const otpHash = await hash(otp,12)
+            const genOtp = await generateOTP()
             const newUser = await database.user.create({data:{
                 userId:userId, 
                 profile:{
@@ -21,12 +19,12 @@ export default async function registerUser(req:Request,res:Response){
                 },
                 otp:{
                     create:{
-                        otpHash:otpHash
+                        otpHash:genOtp.hash
                     }
                 }
             }})
             res.status(200).json({fetched:true,message:"User successfully registered.\nKindly verify using mail."})
-            sendOtp(userId,otp,idType)
+            sendOtp(userId,genOtp.otp,idType)
         }
         else{
             if(!user.passwordHash){
