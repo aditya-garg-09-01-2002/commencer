@@ -2,11 +2,12 @@ import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken"
 import { SessionJwt } from "../../config/jwt";
 import { SessionJwtPayload } from "../../interfaces/jwt";
+import { SessionCookie } from "../../config/cookie";
 
 export default function isValidSession(req:Request,res:Response,next:NextFunction){
     try{    
         const sessionJwtToken:string|undefined = req.params.sessionJwtToken
-        const sessionIDFromSessionCookie = req.signedCookies["Session-ID"]
+        const sessionIDFromSessionCookie = req.signedCookies[SessionCookie.name]
         if(sessionJwtToken === undefined){
             throw new Error("JWT Token not found")
         }
