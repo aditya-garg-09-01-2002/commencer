@@ -29,8 +29,9 @@ async function getUserDetails(req:UserRequest,res:UserResponse,next:NextFunction
 }
 
 export async function getUserDetailsFromJwt(req:UserRequest,res:UserResponse,next:NextFunction){
-    try{
-        const userJwtToken:string|undefined = req.params.userJwtToken
+    try{    
+        const userJwtHeaders:string|string[]|undefined = req.headers[UserJwt.name.toLowerCase()]
+        const userJwtToken:string|undefined = Array.isArray(userJwtHeaders) ? userJwtHeaders[0] : userJwtHeaders
         if(userJwtToken===undefined){
             res.status(404).json({message:"User data not found!!!\nKindly Login Again"})
         }
