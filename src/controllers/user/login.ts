@@ -4,6 +4,7 @@ import { isProductionEnv } from "../../config/app";
 import {uuid as v4} from "uuidv4"
 import { SessionJwtPayload, UserJwtPayload } from "../../interfaces/jwt";
 import { SessionJwt, UserJwt } from "../../config/jwt";
+import { SessionCookie } from "../../config/cookie";
 
 export default async function Login(req:Request,res:Response){
     try{
@@ -20,7 +21,7 @@ export default async function Login(req:Request,res:Response){
         }
         const userJwtToken = jwt.sign(userJwtTokenData,UserJwt.key,jwtOptions)
         const sessionJwtToken = jwt.sign(sessionJwtTokenData,SessionJwt.key,jwtOptions)
-        res.cookie("Session-ID",sessionID,{
+        res.cookie(SessionCookie.name,sessionID,{
             maxAge : 1000*60*60*24*2,
             signed : true,
             httpOnly : true,
