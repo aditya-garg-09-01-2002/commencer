@@ -1,26 +1,16 @@
 import { Request, Response } from "express";
-import jwt from "jsonwebtoken"
 import { isProductionEnv } from "../../config/app";
 import { v4 } from "uuid";
-import { SessionJwtPayload, UserJwtPayload } from "../../interfaces/jwt";
 import { SessionJwt, UserJwt } from "../../config/jwt";
 import { SessionCookie } from "../../config/cookie";
+import { generateSessionJwt, generateUserJwt } from "../../utils/jwt";
 
 export default async function Login(req:Request,res:Response){
     try{
         const {userId} = req.body
         const sessionID = v4()
-        const userJwtTokenData : UserJwtPayload = {
-            userId:userId,
-        }
-        const sessionJwtTokenData : SessionJwtPayload = {
-            sessionID : sessionID
-        }
-        const jwtOptions = {
-            expiresIn:"2d"
-        }
-        const userJwtToken = jwt.sign(userJwtTokenData,UserJwt.key,jwtOptions)
-        const sessionJwtToken = jwt.sign(sessionJwtTokenData,SessionJwt.key,jwtOptions)
+        const userJwtToken = generateUserJwt(userId,UserJwt.key)
+        const sessionJwtToken = generateSessionJwt(sessionID,SessionJwt.key)
         res.cookie(SessionCookie.name,sessionID,{
             maxAge : 1000*60*60*24*2,
             signed : true,
