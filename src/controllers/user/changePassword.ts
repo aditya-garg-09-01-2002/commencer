@@ -9,7 +9,7 @@ export default async function changePassword(req:UserRequest,res:UserResponse){
         const newPasswordHash = await hash(newPassword,12)
         await database.$transaction([
             database.user.update({where:{userId:userId},data:{passwordHash:newPasswordHash}}),
-            database.otp.delete({where:{userId:userId}})
+            database.otp.deleteMany({where:{userId:userId}}) // supposed to delete atmost 1 otp entry
         ])
         res.status(201).json({fetched:true,message:"Your password has been changed password successfully."})
     }catch(error){
