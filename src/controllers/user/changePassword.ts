@@ -1,4 +1,4 @@
-import { compare, hash } from "bcrypt";
+import { hash } from "bcrypt";
 import { database } from "../../config/database";
 import { UserRequest, UserResponse } from "../../interfaces/express";
 
