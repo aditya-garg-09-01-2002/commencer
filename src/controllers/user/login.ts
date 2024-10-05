@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken"
 import { isProductionEnv } from "../../config/app";
-import {uuid as v4} from "uuidv4"
+import { v4 } from "uuid";
 import { SessionJwtPayload, UserJwtPayload } from "../../interfaces/jwt";
 import { SessionJwt, UserJwt } from "../../config/jwt";
 import { SessionCookie } from "../../config/cookie";
