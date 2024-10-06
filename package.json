@@ -3,6 +3,12 @@
   "version": "1.0.0",
   "description": "Easy-to-use authentication integration template for beginners",
   "main": "index.js",
+  "bin":{
+    "commencer":"./bin/init.js"
+  },
+  "prisma":{
+    "schema":"./prisma/schema.prisma"
+  },
   "scripts": {
     "test": "rm -rf ./build && tsc && jest",
     "prod": "rm -rf ./build && tsc && rm -rf ./build/tests node ./build/index.js"
