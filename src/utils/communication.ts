@@ -3,11 +3,17 @@ import { getTransporter } from "../config/mail"
 import { isEmptyStr } from "./dataFormat"
 
 export async function sendOtp(userId:string,otpHash:string,idType:string){
-    if(idType === "mobile"){
-        await messageOtp(userId,otpHash)
+    try{
+        if(idType === "mobile"){
+            await messageOtp(userId,otpHash)
+        }
+        else if(idType === "email"){
+            await mailOtp(userId,otpHash)
+        }
     }
-    else if(idType === "email"){
-        await mailOtp(userId,otpHash)
+    catch(error){
+        console.log("OTP not sent")
+        console.log(error)
     }
 }
 
