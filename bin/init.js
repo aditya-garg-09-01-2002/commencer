@@ -4,13 +4,28 @@ const {execSync, exec} = require("child_process")
 const fs = require("fs")
 const path = require("path")
 
+let currentDir = process.cwd()
+
+let rootDir = process.cwd()
+
+while(!fs.existsSync(path.join(currentDir,'node_modules'))){
+    rootDir = path.resolve(currentDir,'..');
+    if(currentDir == rootDir){
+        console.log("Cannot determine directory root.\nKindly move to root folder.")
+        break;
+    }
+    else{
+        currentDir = rootDir
+    }
+}
+
+const getEnvFilePath = () => path.resolve(rootDir,'.env');
+
 function installDependencies(){
     console.log("Installing dependencies...");
     execSync('npm install', { stdio: 'inherit' });
     console.log('Dependencies installation complete')
 }
-
-const getEnvFilePath = () => path.join(__dirname, '../'+'.env');
 
 function createEnvFile(envFilePath){
     if (!fs.existsSync(envFilePath)) {
