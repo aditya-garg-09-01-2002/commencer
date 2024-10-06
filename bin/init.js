@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const {execSync, exec} = require("child_process")
+const {execSync} = require("child_process")
 const fs = require("fs")
 const path = require("path")
 
@@ -44,8 +44,11 @@ function addEnvVariables(environmentVariables,envFilePath){
     `);
 
     Object.keys(environmentVariables).forEach(variable_name=>{
-        const variable_value = environmentVariables[variable_name]
+        let variable_value = environmentVariables[variable_name]
         if(!content.includes(variable_name)){
+            if(variable_value === undefined || typeof variable_value === "string"){
+                variable_value = `"${variable_value}"`
+            }
             fs.appendFileSync(envFilePath,`\n${variable_name}=${variable_value}\n`)
         }
         else{
