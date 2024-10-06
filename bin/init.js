@@ -67,11 +67,11 @@ try{
         COMMENCER_USER_JWT_KEY:"your_user_jwt_key",
         COMMENCER_ENVIRONMENT : "DEVELOPMENT  #acceptable values = {DEVELOPMENT, PRODUCTION, TESTING}" ,
         APP_NAME : "your-app-name",
-        CLIENT_ID: "your-mail-client-id",
-        CLIENT_SECRET: "your-mail-client-secret",
-        REDIRECT_URI: "your-mail-redirect-uri",
-        REFRESH_TOKEN:"your-mail-refresh-token",
-        SERVICE: "your-mail-service",
+        MAIL_CLIENT_ID: "your-mail-client-id",
+        MAIL_CLIENT_SECRET: "your-mail-client-secret",
+        MAIL_REDIRECT_URI: "your-mail-redirect-uri",
+        MAIL_REFRESH_TOKEN:"your-mail-refresh-token",
+        MAIL_SERVICE: "your-mail-service",
         SENDER_MAIL:"your-sender-mail",
     }
     
