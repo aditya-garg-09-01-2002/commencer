@@ -46,31 +46,40 @@ function deployPrisma(){
     execSync('npx prisma migrate deploy',{stdio:'inherit'})
 }
 
-console.log("Starting initialization...");
+try{
 
-installDependencies()
-
-// Example: Create an .env file if it doesn’t exist 
-const envFilePath = getEnvFilePath()
-createEnvFile(envFilePath)
-
-const environmentVariables = {
-    COMMENCER_DATABASE_URL:"mysql://<database_user>:<database_password>@<database_host>:<database_port>/<database_name>?schema=public",
-    APP_PORT : 9000,
-    COMMENCER_SESSION_JWT_NAME:"your_session_jwt_name",
-    COMMENCER_SESSION_JWT_KEY:"your_session_jwt_key",
-    COMMENCER_SESSION_COOKIE_NAME:"your_session_cookie_name",
-    COMMENCER_SESSION_COOKIE_KEY:"your_session_cookie_key",
-    COMMENCER_USER_JWT_NAME:"your_user_jwt_name",
-    COMMENCER_USER_JWT_KEY:"your_user_jwt_key",
-    COMMENCER_ENVIRONMENT : "DEVELOPMENT  #acceptable values = {DEVELOPMENT, PRODUCTION, TESTING}" ,
+    console.log("Starting initialization...");
+    
+    installDependencies()
+    
+    // Example: Create an .env file if it doesn’t exist 
+    const envFilePath = getEnvFilePath()
+    createEnvFile(envFilePath)
+    
+    const environmentVariables = {
+        COMMENCER_DATABASE_URL:"mysql://<database_user>:<database_password>@<database_host>:<database_port>/<database_name>?schema=public",
+        APP_PORT : 9000,
+        COMMENCER_SESSION_JWT_NAME:"your_session_jwt_name",
+        COMMENCER_SESSION_JWT_KEY:"your_session_jwt_key",
+        COMMENCER_SESSION_COOKIE_NAME:"your_session_cookie_name",
+        COMMENCER_SESSION_COOKIE_KEY:"your_session_cookie_key",
+        COMMENCER_USER_JWT_NAME:"your_user_jwt_name",
+        COMMENCER_USER_JWT_KEY:"your_user_jwt_key",
+        COMMENCER_ENVIRONMENT : "DEVELOPMENT  #acceptable values = {DEVELOPMENT, PRODUCTION, TESTING}" ,
+    }
+    
+    addEnvVariables(environmentVariables)
+    
+    setGitHubCommitTemplate()
+    
+    deployPrisma()
+    
+    console.log("Initialization complete!");
+    
+}
+catch(error){
+    console.log("Error while installation, please report us with error so we can help resolve issue.")
+    console.log(error)
 }
 
-addEnvVariables(environmentVariables)
-
-setGitHubCommitTemplate()
-
-deployPrisma()
-
-console.log("Initialization complete!");
 
