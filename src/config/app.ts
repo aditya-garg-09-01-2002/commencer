@@ -3,12 +3,12 @@ import dotenv from "dotenv"
 dotenv.config()
 
 let environment : string | undefined = process.env.COMMENCER_ENVIRONMENT
+export const APP_NAME : string | undefined = process.env.APP_NAME
 
 if(!(environment==="DEVELOPMENT"||environment==="DEVELOPMENT"||environment==="DEVELOPMENT")){
     console.log("No Environment was set in .env file. Please confirm if you have run initialisation command.\n\nrefer - README for more info\n\nDefault environment is been set as DEVELOPMENT => not production ready")
     environment = "DEVELOPMENT"
 }
-
 
 export const port : string = process.env.APP_PORT as string
 
