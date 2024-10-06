@@ -21,6 +21,8 @@ while(!fs.existsSync(path.join(currentDir,'node_modules'))){
 
 const getEnvFilePath = () => path.resolve(rootDir,'.env');
 
+const getGitignoreFilePath = () => path.resolve(rootDir,'.gitignore')
+
 function installDependencies(){
     console.log("Installing dependencies...");
     execSync('npm install', { stdio: 'inherit' });
@@ -61,6 +63,18 @@ function deployPrisma(){
     execSync('npx prisma migrate deploy',{stdio:'inherit'})
 }
 
+function createGitignore(){
+    const gitignoreFilePath = getGitignoreFilePath()
+    if(!fs.existsSync(gitignoreFilePath)){
+        fs.writeFileSync(gitignoreFilePath,'')
+        console.log(".gitignore file created")
+    }
+    fs.appendFileSync(gitignoreFilePath,`
+.env
+node_modules
+    `)
+}
+
 try{
 
     console.log("Starting initialization...");
@@ -95,6 +109,8 @@ try{
     setGitHubCommitTemplate()
     
     deployPrisma()
+
+    createGitignore()
     
     console.log("Initialization complete!");
     
