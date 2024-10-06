@@ -43,6 +43,8 @@ function addEnvVariables(environmentVariables,envFilePath){
     #Currently Commencer works with mysql only, lookout for newer version to work with them.
     `);
 
+    const alreadyPresentVariables = []
+
     Object.keys(environmentVariables).forEach(variable_name=>{
         let variable_value = environmentVariables[variable_name]
         if(!content.includes(variable_name)){
@@ -52,18 +54,17 @@ function addEnvVariables(environmentVariables,envFilePath){
             fs.appendFileSync(envFilePath,`\n${variable_name}=${variable_value}\n`)
         }
         else{
-            console.log(`${variable_name} is already present in .env file, please make sure it has a valid value`)
+            alreadyPresentVariables.push(variable_name)
         }
     })
+    if(alreadyPresentVariables.length){
+        console.log(alreadyPresentVariables.length+" are already present in the .env file, please make sure is/they has/have correct value(s).")
+        alreadyPresentVariables.forEach(variable_name=>console.log(variable_name))
+    }
 }
 
 function setGitHubCommitTemplate(){
     execSync('git config commit.template .gitmessage.txt', { stdio: 'inherit' });
-}
-
-function deployPrisma(){
-    execSync('npx prisma generate',{stdio:'inherit'})
-    execSync('npx prisma migrate deploy',{stdio:'inherit'})
 }
 
 function createGitignore(){
@@ -72,10 +73,13 @@ function createGitignore(){
         fs.writeFileSync(gitignoreFilePath,'')
         console.log(".gitignore file created")
     }
-    fs.appendFileSync(gitignoreFilePath,`
-.env
-node_modules
-    `)
+    const content = fs.readFileSync(gitignoreFilePath,'utf-8')
+    if(!content.includes('.env')){
+        fs.appendFileSync(gitignoreFilePath,`\n.env\n`)
+    }
+    if(!content.includes('node_modules')){
+        fs.appendFileSync(gitignoreFilePath,`\nnode_modules\n`)
+    }
 }
 
 try{
@@ -110,8 +114,6 @@ try{
     addEnvVariables(environmentVariables,envFilePath)
     
     setGitHubCommitTemplate()
-    
-    deployPrisma()
 
     createGitignore()
     
