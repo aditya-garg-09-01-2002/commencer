@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "Easy-to-use authentication integration template for beginners",
   "main": "index.js",
-  "bin":{
-    "commencer":"./bin/init.js"
+  "bin": {
+    "commencer": "./bin/init.js"
   },
-  "prisma":{
-    "schema":"./prisma/schema.prisma"
+  "prisma": {
+    "schema": "./prisma/schema.prisma"
   },
   "scripts": {
     "test": "rm -rf ./build && tsc && jest",
@@ -33,7 +33,9 @@
     "cookie-signature": "^1.2.1",
     "cors": "^2.8.5",
     "express": "^4.21.0",
+    "googleapis": "^144.0.0",
     "jsonwebtoken": "^9.0.2",
+    "nodemailer": "^6.9.15",
     "prisma": "^5.20.0",
     "supertest": "^7.0.0",
     "ts-jest": "^29.2.5",
@@ -51,6 +53,7 @@
     "@types/jest": "^29.5.13",
     "@types/jsonwebtoken": "^9.0.7",
     "@types/node": "^22.7.4",
+    "@types/nodemailer": "^6.4.16",
     "@types/supertest": "^6.0.2",
     "@types/uuidv4": "^5.0.0",
     "dotenv": "^16.4.5",
