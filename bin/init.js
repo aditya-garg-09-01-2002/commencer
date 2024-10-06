@@ -71,7 +71,7 @@ try{
         MAIL_CLIENT_SECRET: "your-mail-client-secret",
         MAIL_REDIRECT_URI: "your-mail-redirect-uri",
         MAIL_REFRESH_TOKEN:"your-mail-refresh-token",
-        MAIL_SERVICE: "your-mail-service",
+        MAIL_SERVICE: "your-mail-service #currently gmail is supported, for other services, kindly look forward to updated versions, if you can help with this, kindly contribute to our github repository",
         SENDER_MAIL:"your-sender-mail",
     }
     
