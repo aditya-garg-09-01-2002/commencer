@@ -3,10 +3,12 @@ Easy authentication integration for beginner dev projects
 
 How to contribute to the repository.
 <code> 
+    How to setup repository as developer to the repository or as a developer using the npm package?
 
-    #Open your terminal/command prompt.
-    #Run the following command to configure the template
-    git config commit.template .gitmessage.txt
+    run :- npx commencer
+    you will find .env find in your repository directory, there will be COMMENCER_DATABASE_URL, set it according to your mysql database url
+    run :- npx prisma generate
+    run :- npx prisma migrate deploy
 </code>
 <code>
 
