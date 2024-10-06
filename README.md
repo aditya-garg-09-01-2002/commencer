@@ -13,7 +13,7 @@ How to contribute to the repository.
 <code>
 
     #To stage changes (simply adding changes), run:
-    git add &ltfile-path/file-name&gt (recommended)
+    git add < file-path/file-name > (recommended)
     #To commit the staged changes, run:
     git commit #opens vim editor
 
@@ -27,7 +27,7 @@ How to contribute to the repository.
 
 
     #or
-    git commit -m "&ltmessage&gt" (not recommended)
+    git commit -m "< message >" (not recommended)
 
 </code>
 
