@@ -8,13 +8,13 @@ interface jwtProps {
 }
 
 export const SessionJwt : jwtProps = {
-    name : process.env.SESSION_JWT_NAME as string,
-    key : process.env.SESSION_JWT_KEY as string
+    name : process.env.COMMENCER_SESSION_JWT_NAME as string,
+    key : process.env.COMMENCER_SESSION_JWT_KEY as string
 }
 
 export const UserJwt : jwtProps = {
-    name : process.env.USER_JWT_NAME as string,
-    key : process.env.USER_JWT_KEY as string
+    name : process.env.COMMENCER_USER_JWT_NAME as string,
+    key : process.env.COMMENCER_USER_JWT_KEY as string
 }
 
 //set default

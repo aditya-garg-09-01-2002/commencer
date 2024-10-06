@@ -2,11 +2,11 @@ import dotenv from "dotenv"
 
 dotenv.config()
 
-const environment : string | undefined = process.env.ENVIRONMENT
-export const port : string = process.env.PORT as string
+const environment : string | undefined = process.env.COMMENCER_ENVIRONMENT
+export const port : string = process.env.APP_PORT as string
 
 export function isDevelopmentEnv(){
-    return !isNotDevelopmentEnv() && environment !== "Development"
+    return !isNotDevelopmentEnv() && environment !== "DEVELOPMENT"
 }
 
 export function isNotDevelopmentEnv():boolean{
@@ -20,7 +20,7 @@ export function isNotDevelopmentEnv():boolean{
 }
 
 export function isProductionEnv(){
-    return environment === "Production"
+    return environment === "PRODUCTION"
 }
 
 export function isTestingEnv(){

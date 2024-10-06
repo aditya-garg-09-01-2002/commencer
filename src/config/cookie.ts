@@ -8,8 +8,8 @@ interface cookieProps {
 }
 
 export const SessionCookie : cookieProps = {
-    name : process.env.SESSION_COOKIE_NAME as string,
-    key : process.env.SESSION_COOKIE_KEY as string
+    name : process.env.COMMENCER_SESSION_COOKIE_NAME as string,
+    key : process.env.COMMENCER_SESSION_COOKIE_KEY as string
 }
 
 
