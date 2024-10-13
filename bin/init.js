@@ -49,7 +49,8 @@ function addEnvVariables(environmentVariables,envFilePath){
         let variable_value = environmentVariables[variable_name]
         if(!content.includes(variable_name)){
             if(variable_value === undefined || typeof variable_value === "string"){
-                variable_value = `"${variable_value}"`
+                const [value,comment] = variable_value.split('#')
+                variable_value = comment?`"${value}" #${comment}`:`"${value}"`
             }
             fs.appendFileSync(envFilePath,`\n${variable_name}=${variable_value}\n`)
         }
@@ -101,13 +102,13 @@ try{
         COMMENCER_SESSION_COOKIE_KEY:"your_session_cookie_key",
         COMMENCER_USER_JWT_NAME:"your_user_jwt_name",
         COMMENCER_USER_JWT_KEY:"your_user_jwt_key",
-        COMMENCER_ENVIRONMENT : "DEVELOPMENT"  #acceptable values = {DEVELOPMENT, PRODUCTION, TESTING} ,
+        COMMENCER_ENVIRONMENT : "DEVELOPMENT #acceptable values = {DEVELOPMENT, PRODUCTION, TESTING} " ,
         APP_NAME : "your-app-name",
         MAIL_CLIENT_ID: "your-mail-client-id",
         MAIL_CLIENT_SECRET: "your-mail-client-secret",
         MAIL_REDIRECT_URI: "your-mail-redirect-uri",
         MAIL_REFRESH_TOKEN:"your-mail-refresh-token",
-        MAIL_SERVICE: "your-mail-service" #currently gmail is supported, for other services, kindly look forward to updated versions, if you can help with this, kindly contribute to our github repository,
+        MAIL_SERVICE: "your-mail-service #currently gmail is supported, for other services, kindly look forward to updated versions, if you can help with this, kindly contribute to our github repository",
         SENDER_MAIL:"your-sender-mail",
     }
     
