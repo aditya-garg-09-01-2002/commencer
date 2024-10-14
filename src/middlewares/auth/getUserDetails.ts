@@ -15,7 +15,7 @@ async function getUserDetails(req:UserRequest,res:UserResponse,next:NextFunction
             req.userID = userId as string
             const user = await database.user.findUnique({where:{userId:req.userID}})
             if(!user){
-                res.status(500).json({fetched:false,message:"User not registered!!!\nKindly consider registering user."})
+                res.status(404).json({fetched:false,message:"User not registered!!!\nKindly consider registering user."})
             }
             else{
                 req.user = user;
