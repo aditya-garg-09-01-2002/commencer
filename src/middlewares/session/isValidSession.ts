@@ -11,7 +11,7 @@ export default function isValidSession(req:Request,res:Response,next:NextFunctio
         const sessionJwtToken:string|undefined = Array.isArray(sessionJwtHeaders) ? sessionJwtHeaders[0] : sessionJwtHeaders
         const sessionIDFromSessionCookie = req.signedCookies[SessionCookie.name]
         if(sessionJwtToken === undefined || isEmptyStr(sessionJwtToken) || isEmptyStr(sessionIDFromSessionCookie)){
-            throw new Error("Session credentials not found")
+            res.status(401).json({message:"Session credentials not found",fetched:false})
         }
         else{
             const jwtTokenData = jwt.verify(sessionJwtToken,SessionJwt.key) as SessionJwtPayload
