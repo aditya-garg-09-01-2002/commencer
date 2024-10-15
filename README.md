@@ -68,26 +68,27 @@ git commit -m "<message>"
 
 ---
 
-## 4. API Endpoints
-### The ```/src/routes/user/index.ts``` file defines several authentication-related endpoints. All routes listed below are prefixed with ```/auth/```.
+## 4. API Endpoints Description
+### The ```/src/routes/user/index.ts``` file defines several authentication-related endpoints. Some routes listed below are prefixed with ```/auth/```.
 
 ---
 
-### **`POST /auth/register`**
+### 1.  **`POST /auth/register-user`**
 
 - **Input**:
-  - `email` (string): The user’s email.
-  - `password` (string): The user’s password.
+  - `userID` (string): The user’s ID.
+  - `idType` (string): The user’s ID Type (Can be `mobile` / `email`).
+  - `name` (string): The user's Name.
 
 - **Controller**:  
-  Registers a new user and sends an OTP for email verification.
+  Registers a new user and sends an OTP for email/mobile as mentioned for verification.
 
 ---
 
-### **`POST /auth/login`**
+### 2.  **`POST /auth/login`**
 
 - **Input**:
-  - `email` (string): The user’s email.
+  - `userID` (string): The user’s ID.
   - `password` (string): The user’s password.
 
 - **Controller**:  
@@ -95,45 +96,27 @@ git commit -m "<message>"
 
 ---
 
-### **`POST /auth/verify-otp`**
+
+### 3.  **`POST /auth/reset-password`**
 
 - **Input**:
-  - `email` (string): The user’s email.
-  - `otp` (string): The OTP sent to the user's email.
-
+  - `otp` (number): The otp required.
+  - `userID` (string): The user’s ID.
+  - `password` (string): The user’s password.
 - **Controller**:  
-  Verifies the OTP. If valid, the user's email is confirmed.
+  Resets the password for the existing user using Inputs mentioned (using `PUT` method).
 
 ---
 
-### **`POST /auth/reset-password`**
+### 4. **`POST /auth/set-password`**
 
 - **Input**:
-  - `email` (string): The user’s email.
+  - `otp` (string): The otp required.
+  - `userID` (string): The user’s ID.
+  - `password` (string): The user’s password.
 
 - **Controller**:  
-  Sends a password reset link or OTP to the user's email.
-
----
-
-### **`POST /auth/new-password`**
-
-- **Input**:
-  - `email` (string): The user’s email.
-  - `password` (string): The new password.
-
-- **Controller**:  
-  Updates the password for the user’s account if the reset process is valid.
-
----
-
-### **`GET /auth/me`**
-
-- **Middleware**: 
-  - `authMiddleware`: Ensures the request is authenticated.
-
-- **Controller**:  
-  Returns the user’s information based on the authentication token.
+  Creates a password for user’s account (if they have never set one before) using a valid OTP (via the `PUT` method).
 
 ---
 
