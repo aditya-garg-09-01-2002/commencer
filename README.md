@@ -97,7 +97,7 @@ git commit -m "<message>"
 ---
 
 
-### 3.  **`POST /auth/reset-password`**
+### 3.  **`PUT /auth/reset-password`**
 
 - **Input**:
   - `otp` (number): The otp required.
@@ -108,7 +108,7 @@ git commit -m "<message>"
 
 ---
 
-### 4. **`POST /auth/set-password`**
+### 4. **`PUT /auth/set-password`**
 
 - **Input**:
   - `otp` (string): The otp required.
