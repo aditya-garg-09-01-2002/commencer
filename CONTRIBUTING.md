@@ -27,10 +27,25 @@ This guide explains how to generate a Mail API key in the Google Developer Conso
 
 - For security, you can restrict your API key under **API restrictions** to ensure it's used only by authorized applications.
 
-### 5. 💾 Save and Use the API Key
+### 5. 📜 Generate a Refresh Token (Optional but Recommended)
 
-- Store the API key in a secure place, such as an environment configuration file (e.g., `.env` for Node.js).
+If you are using the internal application, which allows a longer period for API tokens before expiry, consider generating a refresh token to ensure seamless email sending:
+
+1. Go to [OAuth 2.0 Playground](https://developers.google.com/oauthplayground/).
+2. In the top-right corner, click the **Settings** icon.
+3. Check the box for **Use your own OAuth credentials** and fill in your **Client ID** and **Client Secret**.
+4. For **API URL**, enter: `https://mail.google.com`.
+5. Click **Authorize APIs** and complete the authorization process to get an authorization code.
+6. Use this authorization code to generate a refresh token.
+
+### 6. 💾 Save and Use the API Key
+
+- Store the API key and refresh token in a secure place, such as an environment configuration file (e.g., `.env` for Node.js).
 - Use this API key within your npm package to send OTPs via email.
+
+## ⚠️ Note
+
+Please ensure to check if your user's credentials have expired to avoid disruptions in service.
 
 ## 📌 Reason for the Update
 
