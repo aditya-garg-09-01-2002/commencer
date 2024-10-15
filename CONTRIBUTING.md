@@ -40,6 +40,15 @@ If you are using the internal application, which allows a longer period for API 
 
 ### 6. 💾 Save and Use the API Key
 
+Following credentials will be required (present in `.env` file already):
+
+- `MAIL_CLIENT_ID=""`
+- `MAIL_CLIENT_SECRET=""`
+- `MAIL_REDIRECT_URI='https://developers.google.com/oauthplayground'`
+- `MAIL_REFRESH_TOKEN=""`
+- `MAIL_SERVICE="gmail"`
+- `SENDER_MAIL="your-mail-id"`
+
 - Store the API key and refresh token in a secure place, such as an environment configuration file (e.g., `.env` for Node.js).
 - Use this API key within your npm package to send OTPs via email.
 
