@@ -1,0 +1,43 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["prismaSchemaFolder"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  userId          String   @id @db.VarChar(255)
+  passwordHash    String?  @db.VarChar(255)
+  profile         Profile?
+  otp             Otp?
+  createdForms    Form[]   @relation("CreatedBy")
+  editAccessForms Form[]   @relation("EditAccess")
+  formId          Int?
+  Entry           Entry[]
+}
+
+model Profile {
+  id     Int     @id @default(autoincrement())
+  userId String  @unique @db.VarChar(255)
+  altId  String? @db.VarChar(255)
+  name   String  @db.VarChar(255)
+
+  user User? @relation(fields: [userId], references: [userId], onDelete: Cascade)
+}
+
+model Otp {
+  is      Int    @id @default(autoincrement())
+  otpHash String @db.VarChar(255)
+  userId  String @unique @db.VarChar(255)
+
+  user User? @relation(fields: [userId], references: [userId], onDelete: Cascade)
+}

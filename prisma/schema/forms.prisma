@@ -1,0 +1,31 @@
+model Form {
+  id         Int     @id @default(autoincrement())
+  formName   String  @db.VarChar(255)
+  authorID   String  @db.VarChar(255)
+  createdBy  User    @relation("CreatedBy", fields: [authorID], references: [userId])
+  editAccess User[]  @relation("EditAccess")
+  Entry      Entry[]
+  fields     Field[]
+}
+
+model Field {
+  id        Int     @id @default(autoincrement())
+  valueType String  @db.VarChar(255)
+  name      String  @db.VarChar(255)
+  pattern   String  @db.VarChar(255)
+  Entries   Entry[]
+  Form      Form?   @relation(fields: [formId], references: [id])
+  formId    Int?
+}
+
+model Entry {
+  id          Int    @id @default(autoincrement())
+  fieldId     Int
+  field       Field  @relation(fields: [fieldId], references: [id])
+  value       String @db.VarChar(255)
+  formId      Int
+  form        Form   @relation(fields: [formId], references: [id])
+  submitterId String @db.VarChar(255)
+  sumbissionId String @db.VarChar(255)
+  submitter   User   @relation(fields: [submitterId], references: [userId])
+}
