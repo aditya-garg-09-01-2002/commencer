@@ -1,6 +1,7 @@
 # User Authentication and Account Management Routes Documentation
 
 This document describes the endpoints available for user authentication, password management, and account operations.
+As of now , all parameters are required.
 
 ## Base Route
 - **Path**: `/auth`
@@ -13,11 +14,9 @@ This document describes the endpoints available for user authentication, passwor
 - **Endpoint**: `POST /auth/register-user`
 - **Description**: Allows new users to register.
 - **Request Body**:
-  - `username` (string): Required, the user's desired username.
-  - `password` (string): Required, the user's password.
-  - `email` (string): Required, the user's email address.
   - `idType` (string): Required, the user's type of communication method used i.e. either *mobile* or *email*.
   - `userId` (string): Required, the user's unique id like specific email or mobile.
+  - `password` (string): Required, the user's password.
 
 - **Response**:
   - **Success**: Returns a success message and user details.
@@ -28,10 +27,9 @@ This document describes the endpoints available for user authentication, passwor
 - **Description**: Authenticates an existing user.
 - **Middleware**: `getUserDetailsFromAPIBody`, `verifyPassword`
 - **Request Body**:
-  - `username` (string): Required, the user's username.
-  - `password` (string): Required, the user's password.
   - `idType` (string): Required, the user's type of communication method used i.e. either *mobile* or *email*.
   - `userId` (string): Required, the user's unique id like specific email or mobile.
+  - `password` (string): Required, the user's password.
 
 - **Response**:
   - **Success**: Returns session details.
@@ -50,7 +48,6 @@ This document describes the endpoints available for user authentication, passwor
 - **Description**: Initiates the password recovery process.
 - **Middleware**: `getUserDetailsFromAPIBody`
 - **Request Body**:
-  - `email` (string): Required, the user's email address.
   - `idType` (string): Required, the user's type of communication method used i.e. either *mobile* or *email*.
   - `userId` (string): Required, the user's unique id like specific email or mobile.
 
@@ -74,7 +71,6 @@ This document describes the endpoints available for user authentication, passwor
 - **Endpoint**: `PUT /auth/resend-otp`
 - **Description**: Resends an OTP to the user.
 - **Request Body**:
-  - `email` (string): Required, the user's email address.
   - `idType` (string): Required, the user's type of communication method used i.e. either *mobile* or *email*.
   - `userId` (string): Required, the user's unique id like specific email or mobile.
 
