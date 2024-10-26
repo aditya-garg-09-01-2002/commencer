@@ -15,7 +15,9 @@ This document describes the endpoints available for user authentication, passwor
 - **Request Body**:
   - `username` (string): Required, the user's desired username.
   - `password` (string): Required, the user's password.
-  - `email` (string): Optional, the user's email address.
+  - `email` (string): Required, the user's email address.
+  - `idType` (string): Required, the user's type of communication method used i.e. either *mobile* or *email*.
+  - `userId` (string): Required, the user's unique id like specific email or mobile.
 
 - **Response**:
   - **Success**: Returns a success message and user details.
@@ -28,6 +30,8 @@ This document describes the endpoints available for user authentication, passwor
 - **Request Body**:
   - `username` (string): Required, the user's username.
   - `password` (string): Required, the user's password.
+  - `idType` (string): Required, the user's type of communication method used i.e. either *mobile* or *email*.
+  - `userId` (string): Required, the user's unique id like specific email or mobile.
 
 - **Response**:
   - **Success**: Returns session details.
@@ -47,6 +51,8 @@ This document describes the endpoints available for user authentication, passwor
 - **Middleware**: `getUserDetailsFromAPIBody`
 - **Request Body**:
   - `email` (string): Required, the user's email address.
+  - `idType` (string): Required, the user's type of communication method used i.e. either *mobile* or *email*.
+  - `userId` (string): Required, the user's unique id like specific email or mobile.
 
 - **Response**:
   - **Success**: Returns a link or code for password reset.
@@ -69,6 +75,8 @@ This document describes the endpoints available for user authentication, passwor
 - **Description**: Resends an OTP to the user.
 - **Request Body**:
   - `email` (string): Required, the user's email address.
+  - `idType` (string): Required, the user's type of communication method used i.e. either *mobile* or *email*.
+  - `userId` (string): Required, the user's unique id like specific email or mobile.
 
 - **Response**:
   - **Success**: Confirmation that the OTP has been resent.
@@ -81,6 +89,8 @@ This document describes the endpoints available for user authentication, passwor
 - **Request Body**:
   - `otp` (string): Required, the OTP sent to the user.
   - `newPassword` (string): Required, the user's desired new password.
+  - `idType` (string): Required, the user's type of communication method used i.e. either *mobile* or *email*.
+  - `userId` (string): Required, the user's unique id like specific email or mobile.
 
 - **Response**:
   - **Success**: Confirmation of successful password reset.
@@ -93,6 +103,8 @@ This document describes the endpoints available for user authentication, passwor
 - **Request Body**:
   - `otp` (string): Required, the OTP sent to the user.
   - `newPassword` (string): Required, the user's new password.
+  - `idType` (string): Required, the user's type of communication method used i.e. either *mobile* or *email*.
+  - `userId` (string): Required, the user's unique id like specific email or mobile.
 
 - **Response**:
   - **Success**: Confirms that the password has been reset.
