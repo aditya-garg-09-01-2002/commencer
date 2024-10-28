@@ -22,7 +22,7 @@ export default async function forgotPassword(req:UserRequest,res:UserResponse){
                     otpHash:genOtp.hash
                 }})
                 res.status(201).json({fetched:true,message:"OTP sent successfully."})
-                sendOtp(user.userId,genOtp.otp,idType)
+                sendOtp(user.userId,genOtp.otp,idType,user.profile.name)
             }
         }
     }catch(error){
