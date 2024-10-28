@@ -6,7 +6,6 @@ import generateOTP from "../../utils/otp";
 export default async function forgotPassword(req:UserRequest,res:UserResponse){
     try{
         const user = req.user
-        const profile = await database.profile.findUnique({where:{userId:req.userID}})
         const {idType} = req.body
         if(!user?.passwordHash){
             res.status(400).json({fetched:false,message:"User verification not completed.\nKindly first verify user first."})
@@ -23,7 +22,7 @@ export default async function forgotPassword(req:UserRequest,res:UserResponse){
                     otpHash:genOtp.hash
                 }})
                 res.status(201).json({fetched:true,message:"OTP sent successfully."})
-                sendOtp(user.userId,genOtp.otp,idType,profile!.name)
+                sendOtp(user.userId,genOtp.otp,idType,user.profile.name)
             }
         }
     }catch(error){

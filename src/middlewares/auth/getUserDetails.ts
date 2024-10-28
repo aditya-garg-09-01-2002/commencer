@@ -5,6 +5,7 @@ import { UserJwt } from "../../config/jwt";
 import { UserJwtPayload } from "../../interfaces/jwt";
 import { isEmptyStr } from "../../utils/dataFormat";
 import { database } from "../../config/database";
+import { UserProps } from "../../interfaces/user";
 
 async function getUserDetails(req:UserRequest,res:UserResponse,next:NextFunction,userId:string|undefined|null){
     try{
@@ -13,12 +14,12 @@ async function getUserDetails(req:UserRequest,res:UserResponse,next:NextFunction
         }
         else{
             req.userID = userId as string
-            const user = await database.user.findUnique({where:{userId:req.userID}})
+            const user = await database.user.findUnique({where:{userId:req.userID}, include:{profile:true}})
             if(!user){
                 res.status(404).json({fetched:false,message:"User not registered!!!\nKindly consider registering user."})
             }
             else{
-                req.user = user;
+                req.user = user as UserProps;
                 next()
             }
         }
